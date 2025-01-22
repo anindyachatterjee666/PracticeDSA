@@ -17,32 +17,56 @@ Explanation: 4th smallest element in the given array is 15.
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.PriorityQueue;
 import java.util.stream.Collectors;
 
 public class KthSmallestElement {
 
     public static void main(String[] args) {
 
-        int arr[] = {7, 10, 4, 20, 15};
+        int arr[] = {7, 10, 4, 20, 15};        // After Sorting -> [4, 7, 10, 15, 20]
         int k = 4;
 
 //        int resultOne = findKthSmallestElementOne(arr, k);
+//        System.out.println("Actual Array: " + Arrays.toString(arr));
 //        System.out.println(String.format("%d-th smallest Element: %s", k, resultOne));
 
-        int resultTwo = findKthSmallestElementTwo(arr, k);
-        System.out.println(String.format("%d-th smallest Element: %s", k, resultTwo));
+//        int resultTwo = findKthSmallestElementTwo(arr, k);
+//        System.out.println("Actual Array: " + Arrays.toString(arr));
+//        System.out.println(String.format("%d-th smallest Element: %s", k, resultTwo));
+
+        int resultThree = findKthSmallestElementThree(arr, k);
+        System.out.println("Actual Array: " + Arrays.toString(arr));
+        System.out.println(String.format("%d-th smallest Element: %s", k, resultThree));
+
     }
 
-//    Java 8
+//    Time Complexity-> O(nLog(n)), Create Max Heap
+    private static int findKthSmallestElementThree(int[] arr, int k) {
+
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Comparator.reverseOrder());
+        for(int i=0; i<k; i++){
+            pq.add(arr[i]);
+        }
+        for(int i=k; i<arr.length; i++){
+            if(arr[i] < pq.peek()){
+                pq.poll();
+                pq.add(arr[i]);
+            }
+        }
+        return pq.peek();
+    }
+
+    //    Java 8
     private static int findKthSmallestElementTwo(int[] arr, int k) {
 
         return Arrays.stream(arr)
                 .sorted()
-                .skip(k-1)
+                .skip(k - 1)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Array does not have enough elements"));
 
-                //.forEach(e -> System.out.println( e + ", "));
+        //.forEach(e -> System.out.println( e + ", "));
 
 //        return Arrays.stream(arr)
 //                .boxed()
@@ -56,9 +80,9 @@ public class KthSmallestElement {
     //    O(n^2)
     private static int findKthSmallestElementOne(int[] arr, int k) {
 
-        for (int i=0; i<arr.length; i++){
-            for (int j=0; j<arr.length; j++){
-                if(arr[i] < arr[j]){
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr.length; j++) {
+                if (arr[i] < arr[j]) {
                     int t = arr[i];
                     arr[i] = arr[j];
                     arr[j] = t;
@@ -66,6 +90,6 @@ public class KthSmallestElement {
             }
         }
         Arrays.stream(arr).forEach(e -> System.out.print(e + ", "));
-        return arr[k-1];
+        return arr[k - 1];
     }
 }
