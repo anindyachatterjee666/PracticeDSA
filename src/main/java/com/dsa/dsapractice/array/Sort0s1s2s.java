@@ -26,7 +26,7 @@ public class Sort0s1s2s {
 
     public static void main(String[] args) {
 
-        int[] arr = {0, 1, 1, 2, 2, 2, 1, 0, 0, 1, 2, 1, 2, 0, 0, 0, 1, 2, 2, 0, 1, 1, 1, 2, 0};
+        int[] arr = {0, 1, 2, 0, 1, 2, 2};
         System.out.println("Before Sorting: " + Arrays.toString(arr));
         int[] resultArr = sorting(arr);
         System.out.println("After Sorting: " + Arrays.toString(resultArr));
