@@ -18,7 +18,7 @@ import java.util.Arrays;
 public class RotateArrayByOne {
     public static void main(String[] args) {
 
-        int[] arr = {1, 2, 3, 4, 5};
+        int[] arr = {50, 22, 45, 19, 37, 64};
         System.out.println(Arrays.toString(arr));
 //        int[] arr1 = shiftArrayByOne(arr);
 
@@ -28,12 +28,12 @@ public class RotateArrayByOne {
     //    using 2 pointer's algo
     private static int[] shiftArrayByOneUsingTwoPointersAlgo(int[] arr) {
 
-        int i = 0, j = arr.length - 1;
-        while (i < j) {
-            int temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
-            i++;
+        int left = 0, right = arr.length - 1;
+        while (left < right) {
+            int temp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = temp;
+            left++;
         }
 
         System.out.println(Arrays.toString(arr));
