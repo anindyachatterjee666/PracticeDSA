@@ -1,11 +1,7 @@
 package com.dsa.dsapractice.streams;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -89,13 +85,33 @@ public class GroupingAggregationSummaryStatistics {
 
 
 //        Problem- 5 -> Counting of products by category
-        Map<String, Long> countProductsByCategory = products.collect(Collectors.groupingBy(Product::category, Collectors.counting()));
-        System.out.println(countProductsByCategory);
+//        Map<String, Long> countProductsByCategory = products.collect(Collectors.groupingBy(Product::category, Collectors.counting()));
+//        System.out.println(countProductsByCategory);
 
 
+//      Problem- 6 -> Products with price > 50.
+//        var filteredProducts = products.filter(item -> item.price > 1000).toList();
+//        System.out.println(filteredProducts);
 
 
+//      Problem- 6 -> Extracting Products names
+//        var productNames = products.map(Product::name).toList();
+//        System.out.println(productNames);
 
+
+//      Problem- 6 -> Partitioning products into expensive & cheap
+//        var partitionedProducts = products.collect(
+//                Collectors.partitioningBy(product -> product.price > 1000));
+//        System.out.println(partitionedProducts);
+
+
+//      Problem- 6 -> Using SummaryStatistics for product prices (min, max, avg, sum, count [5 metrics])
+        Map<String, IntSummaryStatistics> summaryStatisticsProduct = products
+                .collect(Collectors.groupingBy(
+                        Product::category, // Classifier function: groups by product category
+                        Collectors.summarizingInt(Product::price) // Summarizer: computes statistics for product prices
+                ));
+        System.out.println(summaryStatisticsProduct);
 
 
     } // end main
