@@ -79,8 +79,23 @@ public class GroupingAggregationSummaryStatistics {
 
 
 //        Problem- 3 -> Aggregation: Calculating total price of Products by category
-        Map<String, Integer> totalPriceByCategory = products.collect(Collectors.groupingBy(Product::category, Collectors.summingInt(Product::price)));
-        System.out.println(totalPriceByCategory);
+//        Map<String, Integer> totalPriceByCategory = products.collect(Collectors.groupingBy(Product::category , Collectors.summingInt(Product :: price)));
+//        System.out.println(totalPriceByCategory);
+
+
+//        Problem- 4 -> Average of products by category
+//        Map<String, Double> avgPriceByCategory = products.collect(Collectors.groupingBy(Product::category, Collectors.averagingInt(Product::price)));
+//        System.out.println(avgPriceByCategory);
+
+
+//        Problem- 5 -> Counting of products by category
+        Map<String, Long> countProductsByCategory = products.collect(Collectors.groupingBy(Product::category, Collectors.counting()));
+        System.out.println(countProductsByCategory);
+
+
+
+
+
 
 
     } // end main
